@@ -31,13 +31,13 @@ jobs:
         with:
           r-version: "4.4.2"
 
-      - name: Setup R dependencies
-        uses: r-lib/actions/setup-renv@v2
-
       - name: Install missing packages
         run: |
           Rscript -e 'install.packages("box.lsp", repos="http://cran.us.r-project.org")'
           Rscript -e 'renv::restore()'
+
+      - name: Setup R dependencies
+        uses: r-lib/actions/setup-renv@v2
         
       - name: Push to shinyapps.io
         if: github.event_name == 'push'
