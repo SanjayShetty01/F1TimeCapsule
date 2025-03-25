@@ -31,13 +31,25 @@ jobs:
         with:
           r-version: renv
 
+      - name: Debug Installed Packages
+        run: Rscript -e 'installed.packages()[, c("Package", "Version")]'
+
+      - name: Force Install box.lsp
+        run: Rscript -e 'install.packages("box.lsp", repos="https://cloud.r-project.org")'
+
+      - name: Reset renv Cache and Lockfile
+        run: |
+          rm -rf renv/library
+          rm -rf renv/cache
+          rm -f renv.lock
+          Rscript -e 'renv::init()'  # Reinitialize renv
+          Rscript -e 'renv::install("box.lsp")'
+          Rscript -e 'renv::snapshot()'  # Save a clean state
+
       - name: Setup R dependencies
         uses: r-lib/actions/setup-renv@v2
-
-      #- name: Lint R
-        #if: always()
-        #shell: Rscript {0}
-        #run: rhino::lint_r()
+        with:
+          bypass-cache: true
 
       - name: Run R unit tests
         if: always()
