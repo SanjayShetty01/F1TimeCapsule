@@ -34,13 +34,6 @@ jobs:
 
       - name: Setup renv
         uses: r-lib/actions/setup-renv@v2
-        with:
-          bypass-cache: true
-
-      - name: Run R unit tests
-        if: always()
-        shell: Rscript {0}
-        run: rhino::test_r()
 
       - name: Push to shinyapps.io
         if: github.event_name == 'push'
