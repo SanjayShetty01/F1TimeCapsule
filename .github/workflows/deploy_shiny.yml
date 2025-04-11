@@ -38,10 +38,13 @@ jobs:
           Rscript -e "if(!requireNamespace('renv')) install.packages('renv', repos = 'https://cloud.r-project.org')"
           echo "RENV_PATHS_ROOT=${{ github.workspace }}/.renv" >> $GITHUB_ENV
 
+      - name: Install missing package box.lsp
+        run: |
+          Rscript -e "if(!requireNamespace('box.lsp')) install.packages('box.lsp', repos = 'https://cloud.r-project.org')"
+
       - name: Restore packages
         run: |
           Rscript -e "renv::restore(confirm = FALSE, clean = TRUE)"
-          Rscript -e "if(!requireNamespace('box.lsp')) install.packages('box.lsp', repos = 'https://cloud.r-project.org')"
 
       - name: Deploy to shinyapps.io
         env:
@@ -62,5 +65,3 @@ jobs:
             forceUpdate = TRUE,
             lint = FALSE
           )"
-
-          
