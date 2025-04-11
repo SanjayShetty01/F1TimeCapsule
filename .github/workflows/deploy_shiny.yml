@@ -3,8 +3,10 @@ name: deploy-shiny
 on:
   push:
     branches: [main, master]
-    paths-ignore: 
-      - '**/README.md'
+    paths-ignore: '**/README.md'
+  pull_request:
+    branches: [main, master]
+    paths-ignore: '**/README.md'
 
 jobs:
   deploy-shiny:
