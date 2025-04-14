@@ -34,6 +34,8 @@ jobs:
       - name: Install required R packages
         run: |
           install.packages(c(
+            "treesitter",
+            "treesitter.r",
             "shiny", 
             "shinyWidgets", 
             "bs4Dash", 
@@ -41,6 +43,8 @@ jobs:
             "DBI", 
             "glue"
           ), repos = "https://cloud.r-project.org")
+          
+        shell: Rscript {0}
         
       - name: Push to shinyapps.io
         if: github.event_name == 'push'
