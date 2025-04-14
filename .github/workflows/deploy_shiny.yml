@@ -42,7 +42,7 @@ jobs:
             "htmltools", 
             "DBI", 
             "glue",
-            ""box.lsp"
+            "box.lsp"
           ), repos = "https://cloud.r-project.org")
           
         shell: Rscript {0}
